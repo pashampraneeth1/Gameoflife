@@ -1,0 +1,29 @@
+
+node{
+    stage('scm') {
+    // getting the source code management for git
+    git 'https://github.com/wakaleo/game-of-life.git'
+
+}
+stage('mvn package') {
+    def mvnHome = tool name: 'maven', type: 'maven'
+    def mvnCMD = "${mvnHome}/bin/mvn"
+    sh "${mvnCMD} clean package"
+}
+
+stage('archeve') {
+    // archeve the artifactweb
+    archive 'gameoflife-web target/*war'
+}
+stage('junit') {
+    // junit test results
+    junit 'gameoflife-web/target/surefire-reports/*xml'
+}
+stage('sonarqube Analycis') {
+    def mvnHome = tool name: 'maven' type:'maven'
+    with sonarqube Env ('sonarqube'){
+   sh "${mvnHome}/bin/mvn sonar:sonar"
+    }
+    
+}
+}
