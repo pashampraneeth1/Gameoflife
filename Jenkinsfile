@@ -18,5 +18,19 @@ pipeline{
             sh 'echo Sonarqube code quality Checkdone' 
          } 
       }
+         
+      stage ('Test'){
+         agent any
+         steps{
+            sh 'mvn test' 
+         } 
+      }
+      stage ('Package'){
+         agent any
+         steps{
+            sh 'mvn Package' 
+         } 
+      }
+
    }
 }
