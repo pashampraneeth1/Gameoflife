@@ -1,5 +1,5 @@
 pipeline{
-  agent none
+  agent {label 'dockernode'}
   stages{
       stage ('Compile'){
          agent any
