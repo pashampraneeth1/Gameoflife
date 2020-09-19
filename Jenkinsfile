@@ -1,32 +1,17 @@
 pipeline{
   agent none
   stages{
-      stage ('Compile'){
+      stage ('Maven Install'){
          agent any
-         steps{
-            sh "mvn compile" 
+         docker{
+            image 'maven 3.5.0'
          } 
       }
    
-  stage ('Code quality'){
-         agent any
-         steps{
-            sh 'echo Sonarqube code quality Checkdone' 
-         } 
-      }
-         
-      stage ('Test'){
-         agent any
-         steps{
-            sh 'mvn test' 
-         } 
-      }
-      stage ('Package'){
-         agent any
-         steps{
-            sh 'mvn Package' 
-         } 
-      }
+  steps {
+       sh 'mvn clean install'
+       }
+     }
 
    }
 }
