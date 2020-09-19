@@ -7,11 +7,7 @@ pipeline{
             sh "mvn compile" 
          } 
       }
-    stage('Build') {
-           withEnv(["PATH=${tool 'Maven'}/bin:${tool 'java'}/bin:${env.PATH}"]) {
-          sh('mvn clean install')
-    } 
-  }
+   
   stage ('Code quality'){
          agent any
          steps{
