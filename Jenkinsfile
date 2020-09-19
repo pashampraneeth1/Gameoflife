@@ -1,10 +1,28 @@
 pipeline{
   agent none
   stages{
-      stage ('test'){
+      stage ('Compile'){
          agent any
          steps{
-            sh "echo this is a test jenkinsfile pipeline" 
+            sh "mvn compile" 
+         } 
+      }
+      stage ('Code quality'){
+         agent any
+         steps{
+            sh "echo Sonarqube code quality Checkdone" 
+         } 
+      }
+      stage ('Test'){
+         agent any
+         steps{
+            sh "mvn test" 
+         } 
+      }
+      stage ('Package'){
+         agent any
+         steps{
+            sh "mvn Package" 
          } 
       }
   }
