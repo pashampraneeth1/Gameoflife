@@ -4,7 +4,7 @@ pipeline{
       stage ('Compile'){
          agent any
          steps{
-            sh 'mvn compile' 
+            sh 'maven compile' 
          } 
       }
       stage ('Code quality'){
@@ -16,13 +16,13 @@ pipeline{
       stage ('Test'){
          agent any
          steps{
-            sh 'mvn test' 
+            sh 'maven test' 
          } 
       }
       stage ('Package'){
          agent any
          steps{
-            sh 'mvn Package' 
+            sh 'maven Package' 
          } 
       }
   }
